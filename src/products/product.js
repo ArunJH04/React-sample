@@ -20,8 +20,9 @@ export class Product extends React.Component {
               With supporting text below as a natural lead-in to additional content.
             </p>
             <br />
+            <div> Quantity : {this.props.data.count}</div>
             <input
-              placeholder="enter the number of items"
+              placeholder="enter number of items"
               onChange={event => {
                 console.log(event.target.value);
                 this.setState({
@@ -33,7 +34,7 @@ export class Product extends React.Component {
             <button
               className="btn btn-primary"
               onClick={() => {
-                this.props.click(this.props.data);
+                this.props.click(this.props.data, this.state.counter);
               }}
             >
               Buy

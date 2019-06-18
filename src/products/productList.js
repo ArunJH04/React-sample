@@ -16,8 +16,11 @@ export class ProductList extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(product) {
+  handleSubmit(product, count) {
+    product.count = count;
+    console.log(product);
     this.setState({
+      products: this.state.products.filter(sp => sp.id !== product.id).concat([product]),
       selectedProducts: this.state.selectedProducts.concat([product]),
       products: this.state.products.filter(selectedProduct => product.id !== selectedProduct.id)
     });
