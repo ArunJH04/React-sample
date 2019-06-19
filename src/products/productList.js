@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from './product';
+import axios from 'axios';
 
 export class ProductList extends React.Component {
   constructor(props) {
@@ -7,13 +8,20 @@ export class ProductList extends React.Component {
 
     this.state = {
       selectedProducts: [],
-      products: [
-        { id: 1, name: 'vivo', price: 12000, count: 0 },
-        { id: 2, name: 'samsung', price: 20000, count: 0 },
-        { id: 3, name: 'i-phone', price: 40000, count: 0 }
-      ]
+      products: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    let promise = axios.get('https://my-json-server.typicode.com/ArunJH04/ecommerce/products');
+    promise.then(response => {
+      console.log(response.data);
+      this.setState({
+        selectedProducts: [],
+        products: response.data
+      });
+    });
   }
 
   handleSubmit(product, count) {
